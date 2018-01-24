@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.lvxiao.shopping.dao.IGoodsdao">
+
+ 	<select id="getAllByPage" parameterType="Integer"  resultType="com.lvxiao.shopping.pojo.Goods">
+ 		select * from goods limit #{startPos},#{pageSize};
+ 	</select>
+ 	
+ 	<select id="getTotalCount" parameterType="String"  resultType="long">
+ 		select count(*) from goods ;
+ 	</select>
+ 	
+ 	<select id="byType" parameterType="String" resultType="com.lvxiao.shopping.pojo.Goods">
+ 	    select * from goods where type=#{type};
+ 	</select>
+ 	
+ 	<select id="getOne" parameterType="String" resultType="com.lvxiao.shopping.pojo.Goods">
+ 	    select * from goods where gid=#{gid};
+ 	</select>
+ 	
+ 	<insert id="add" >	
+ 		insert into goods(gname, releasetime, price, type, gphoto, des,uid,state) values(#{gname}, #{releasetime}, #{price}, #{type}, #{gphoto}, #{des},#{uid},#{state});
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="String" >
+ 		update goods set gname=#{gname},price=#{price},des=#{des},state=#{state},gphoto=#{gphoto},type=#{type} where gid=#{gid};
+ 	</update>
+ 	
+ 	<delete id="delete" parameterType="String">
+ 	  delete from goods where gid=#{gid}
+ 	</delete>
+  
+ </mapper>
